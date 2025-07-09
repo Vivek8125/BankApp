@@ -1,0 +1,17 @@
+<div class="m-5 d-flex">
+    <h1 class="w-100">Add Funds</h1>
+    <div class="card-body p-5 border w-50 rounded-5 shadow bg-body-secondary">
+        <form #addFundsForm="ngForm" (ngSubmit)="onAddFunds(addFundsForm)"> 
+            <h2 class="card-header">Amount : 
+                <input placeholder="Enter Amount" id="amount" class="form-control" type="number" [(ngModel)]="addFundToWallet" name="amount" required min="0.01" max="99999999" #amountInput="ngModel" /> 
+            </h2>
+            <div *ngIf="amountInput.errors?.['required']  && (amountInput.touched || amountInput.dirty)" class="errordiv text-danger" >Amount is required.</div>
+            <div class="errordiv text-danger" *ngIf="amountInput.errors?.['min'] && (amountInput.touched || amountInput.dirty)">Amount must be greater than 0.</div>
+            <div class="errordiv text-danger" *ngIf="amountInput.errors?.['max'] && (amountInput.touched || amountInput.dirty)"> Amount cannot be more than 8 digits. </div>
+            <div id="errBalance" class="errordiv text-danger" *ngIf="signalRService.NotificationMessage == 'Insufficient funds in the bank account'"> {{signalRService.NotificationMessage}} </div>
+            <button id="addFundsConfirmButton" class="btn btn-outline-primary mt-2" type="submit" [disabled]="addFundsForm.invalid"> Add Funds </button>
+            <button type="button" class="btn btn-outline-danger mt-2 ms-2 w-25" (click)="onReset(addFundsForm)">Reset</button>
+
+        </form>
+    </div>  
+</div>

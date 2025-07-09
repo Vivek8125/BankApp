@@ -1,0 +1,9 @@
+<div class="m-5 d-flex">
+    <h1 class="w-100">Wallet Balance</h1>
+    <div class="card-body p-5 border w-50 rounded-5 bg-success-subtle shadow">
+        <p *ngIf="!hasWallet" id="walletbalance" class="card-header text-success-emphasis">Wallet not found for the employee.</p>
+        <h2 *ngIf="hasWallet" id="walletbalance" class="card-header text-success-emphasis">Wallet Balance:{{walletBalance}}</h2>
+        <p id="accountbalance">Account Balance:{{AccountBalance}}</p>
+    </div>
+</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,14 @@
+<div class="m-5">
+    <div class="border p-5 rounded-5 w-50 mx-auto shadow bg-body-secondary">
+        <h1>Login Form</h1>
+        <form [formGroup]="LoginForm" (ngSubmit)="onLogin()">
+            UserName : <input placeholder="User Name" id="username" class="form-control" type="text" formControlName="userName">
+            <p class="text-danger" *ngIf="LoginForm.get('userName')?.invalid && LoginForm.get('userName')?.touched ">UserName is required</p>
+            Password : <input placeholder="Password" id="password" class="form-control" type="password" formControlName="password">
+            <p class="text-danger" *ngIf="LoginForm.get('password')?.invalid && LoginForm.get('password')?.touched">Password is required</p>
+            <button id="btnSubmit" type="submit" class="btn btn-outline-primary mt-2 w-25">Login</button>
+            <button type="button" class="btn btn-outline-danger mt-2 ms-2 w-25" (click)="onReset()">Reset</button>
+            <p *ngIf="isInValidLogin" class="text-danger">Invalid Credentials</p>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="m-5 ">
+    <div class="border rounded-5 p-5 ">
+        <h2>Password Update</h2>
+        <form [formGroup]="UpdateForm">
+            <div class="mb-3">
+                <label for="passwordupdate" class="col-form-label">Enter Password:</label>
+                <input placeholder="Password" type="password" formControlName="password" class="form-control"
+                    id="passwordupdate">
+                <p class="text-danger" *ngIf="UpdateForm.get('password')?.invalid && UpdateForm.get('password')?.touched">
+                    Password is Required</p>
+            </div>
+            <div class="mb-3">
+                <label for="confirmpasswordupdate" class="col-form-label">Confirm Password:</label>
+                <input placeholder="Confirm Password" type="password" formControlName="confirmPassword" class="form-control"
+                    id="confirmpasswordupdate">
+                <p class="text-danger"
+                    *ngIf="UpdateForm.get('confirmPassword')?.errors?.['required']  && UpdateForm.get('confirmPassword')?.touched">
+                    Password is Required</p>
+                <p class="text-danger"
+                    *ngIf="UpdateForm.errors?.['passwordMismatch'] && (UpdateForm.get('confirmPassword')?.dirty || UpdateForm.get('confirmPassword')?.touched)">
+                    Password not Match</p>
+            </div>
+            <button type="button" class="btn btn-outline-danger" (click)="onReset()">Reset</button>
+            <button type="submit" class="btn btn-primary ms-2" (click)="onUpdate()">Update Password</button>
+        </form>
+    </div>
+</div>

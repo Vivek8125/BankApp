@@ -1,0 +1,21 @@
+<div class="m-5 d-flex">
+    <h1 class="w-100">Send Money</h1>
+    <div class=" card-body p-5 border w-50 rounded-5 shadow bg-body-secondary">
+        <form #sendMoneyForm="ngForm" (ngSubmit)="onSendMoney(sendMoneyForm)"> 
+            Recipient :
+            <select id="recipientInput" [(ngModel)]="sendTo" name="recipient" required #recipient="ngModel"  class=" form-control">
+                <option style="font-weight: bold;">Please Option</option>
+                <option *ngFor="let employee of EmployeeData" [value]="employee.employeeId"> {{ employee.firstName }} {{employee.lastName }} </option>
+            </select>
+            <div  id="recipientError" class="text-danger"  *ngIf="recipient.errors?.['required'] && (recipient.touched || recipient.dirty)">Recipient is required.</div> 
+
+            Amount : 
+            <input placeholder="Enter Amount" id="amountInput" type="number" [(ngModel)]="transferAmount" name="amount" required min="0.01" max="99999999" #amountInput="ngModel" class=" form-control"/>
+            <div class="errordiv text-danger" *ngIf="amountInput.errors?.['required'] && (amountInput.touched || amountInput.dirty)">Amount is required.</div>
+            <div class="errordiv text-danger" *ngIf="amountInput.errors?.['min'] && (amountInput.touched || amountInput.dirty)">Amount must be greater than 0.</div>
+            <div class="errordiv text-danger" *ngIf="amountInput.errors?.['max'] && (amountInput.touched || amountInput.dirty)">Amount cannot exceed 8 digits.</div> 
+            <button id="btnSend" class="btn btn-outline-primary mt-2" type="submit" [disabled]="sendMoneyForm.invalid">Send Money</button>
+            <button type="button" class="btn btn-outline-danger mt-2 ms-2 w-25" (click)="onReset(sendMoneyForm)">Reset</button>
+        </form>
+    </div>
+</div>
